@@ -1,0 +1,65 @@
+Proof of Concept:
+
+This tool was designed is being designed as an active defense
+tool made to target sniffers.  
+
+Using a sniffer is not bad.  We are searching for malicious
+activity, not *just* cards in promiscuous mode.  We want to
+break the attacker's OODA loop by increasing our visibility
+into his methods. This tool aims to extend that methedology
+to within the realm of the passive attack as best we can.
+
+Just open it up and follow the menu choices. 
+There are currently three components.
+1) Web Server
+	An example web page is served by a simple server
+	that creates alerts when a non-whitelisted address
+	attempts to login with the proper credentials
+
+2) Honey Packets
+	A small script sends very obvious plain text packets
+	on to the network via authenticating to the fake 
+	admin portal on the web server.  Most attackers will
+	use sniffers to find situations just like this, why 
+	wouldn't he try to login? 
+
+3) Jammer
+	Reading from a dummy pcap we create a momentary surge
+	in network traffic that obscures legitimate data in
+	transmission. Can also read from a pcap file.
+			^ (correctly, hopefully soon)
+		I plan on expanding this with an algorithm
+	that mimmics plain text http authentication and
+	browsing, to create hundreds if not thousands of 
+	false positives for a sniffer to dig through.
+
+The modules I plan on adding (Probably)
+	--Command line arguments
+
+	--An interceptible use/mutation of webbugserver
+
+	--Detection of cards in promiscuous mode
+
+	--Potentially, the ability to launch anti-sniffer
+		exploits.  Fishing with dynamite...
+
+	--Expansion upon the idea of the honeylogin and packet.
+		Sniffing good, malicious activity bad..
+			Detecting that is what we want.
+
+	--Proper non-network clogging jammer
+
+	--Arp Cache Poisoning Detection
+
+	--Arp Cache Poisoning to control malicious hosts
+
+	--Anti IDS signature dumper | jammer
+		Fourth of July
+
+	--Just all around simulations of insecure traffic
+
+	--HoneyCookies "Session Marshals"
+
+
+This is my dream for this tool.
+We shall see where it goes from here...
