@@ -2,8 +2,9 @@
 #Stinky
 #Development Ver 1 (POC)
 
-from scapy.all import rdpcap, send
+from scapy.all import Raw, rdpcap, send
 import random
+import hashlib
 import time
 import socket
 import sys
@@ -11,19 +12,64 @@ import BaseHTTPServer
 import subprocess
 from SimpleHTTPServer import SimpleHTTPRequestHandler
 
+class Handle(BaseHTTPServer.BaseHTTPRequestHandler):
+	#list = ['admin','IT','James','Gandalf','toor','karl','janice']
+	#def passwd():
+	#	num = random.random(10000,900000)
+	#	h = hashlib.md5()
+	#	h.update(num)
+	#	return h.hexdigest()
+
+	def do_GET(self):
+		audit_path = str.split(self.path, "?")
+		if self.path != "/" and audit_path[0] != "/login.php" and self.path != "/favicon.ico":
+			self.send_error(404, "file not found")
+			return
+		self.send_response(200)
+		self.send_header("Content-type","text/html")
+		self.end_headers()
+		try:
+			stdout = sys.stdout
+			sys.stdout = self.wfile
+			self.makepage()
+		finally:
+			sys.stdout = stdout
+
+	def makepage(self):
+		if self.path == "/":
+			f = open("./index.html","r")
+		elif self.path == "/favicon.ico":
+			f = open("./favicon.ico","r")
+		else:
+			#t = str.split(self.path,"pass")
+			#t = str.split(t[1],"&")
+			#if t[0] == "=asdf":
+			alert = open("./log.stinky","a")
+			alert.write("ALERT")
+			alert.close()
+			f = open("./login.html","r")
+		rep = f.read()
+		f.close()
+		self.wfile.write(rep)
+		list = ['admin','IT','James','Gandalf','toor','karl','janice']
+		for i in list:
+			num = random.randint(90000,9000000)
+			h = hashlib.md5()
+			h.update(str(num))
+			print "<br />" + i + ":" + h.hexdigest()
+		
+
 def WebServ():
 	HandlerClass = SimpleHTTPRequestHandler
 	ServerClass  = BaseHTTPServer.HTTPServer
 	Protocol	 = "HTTP/1.0"
 
-	if sys.argv[1:]:
-		port = int(sys.argv[1])
-	else:
-		port = 8080
+
+	port = 8080
 	server_address = ('0.0.0.0', port)
 
 	HandlerClass.protocol_version = Protocol
-	httpd = ServerClass (server_address, HandlerClass)
+	httpd = ServerClass (server_address, Handle)
 
 	sa = httpd.socket.getsockname()
 	print "Serving HTTP on", sa[0], "port", sa [1], "..."
@@ -46,7 +92,8 @@ def Login(page, HOST):
 		s.close()
 
 def Jam():
-	a = rdpcap('./net.pcap')
+	#a = rdpcap('./net.pcap')
+	a = Raw("Do I really smell this good?")
 	while True:
 		send(a)
 
