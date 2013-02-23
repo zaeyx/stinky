@@ -52,6 +52,9 @@ The modules I plan on adding (Probably)
 	--Arp Cache Poisoning Detection
 
 	--Arp Cache Poisoning to control malicious hosts
+		I want a way to jam them, without affecting
+		real network traffic.  Some sort of me and
+		them only network would be great for this.
 
 	--Anti IDS signature dumper | jammer
 		Fourth of July
