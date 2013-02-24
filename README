@@ -1,6 +1,6 @@
 Proof of Concept:
 
-This tool was designed is being designed as an active defense
+This program is being designed as an active defense
 tool made to target sniffers.  
 
 Using a sniffer is not bad.  We are searching for malicious
@@ -14,17 +14,18 @@ There are currently three components.
 1) Web Server
 	An example web page is served by a simple server
 	that creates alerts when a non-whitelisted address
-	attempts to login with the proper credentials
+	attempts to login with the proper(Currently any)
+	credentials
 
 2) Honey Packets
 	A small script sends very obvious plain text packets
-	on to the network via authenticating to the fake 
-	admin portal on the web server.  Most attackers will
-	use sniffers to find situations just like this, why 
-	wouldn't he try to login? 
+	on to the network that look like  authentication to 
+	the fake admin portal on the web server.  Most 
+	attackers will use sniffers to find situations just 
+	like this, why wouldn't he try to login? 
 
 3) Jammer
-	Reading from a dummy pcap we create a momentary surge
+	We create a momentary surge
 	in network traffic that obscures legitimate data in
 	transmission. Can also read from a pcap file.
 			^ (correctly, hopefully soon)
