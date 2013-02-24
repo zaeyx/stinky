@@ -68,7 +68,8 @@ class Handle(BaseHTTPServer.BaseHTTPRequestHandler):
 					write = False
 					break
 			if write == True:
-				alert_string = self.address_string() + ":" + self.path + "\n"
+				current = str(time.time())
+				alert_string = self.address_string() + ":" + self.path + ":" + current + "\n"
 				alert = open("./log.stinky","a")
 				alert.write(alert_string)
 				alert.close()

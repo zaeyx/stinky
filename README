@@ -35,6 +35,8 @@ There are currently three components.
 	false positives for a sniffer to dig through.
 
 The modules I plan on adding (Probably)
+	--Alerts include MAC
+
 	--Command line arguments
 
 	--An interceptible use/mutation of webbugserver
